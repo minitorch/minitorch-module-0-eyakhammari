@@ -152,10 +152,10 @@ def is_close(x: float, y: float) -> float:
 
     Returns:
     -------
-        True if |x - y| < 1e-2, otherwise False
+        1.0 if |x - y| < 1e-2, otherwise 0.0
 
     """
-    return abs(x - y) < 1e-2
+    return 1.0 if abs(x - y) < 1e-2 else 0.0
 
 
 def sigmoid(x: float) -> float:
@@ -304,7 +304,7 @@ def relu_back(x: float, d: float) -> float:
 # - prod: take the product of lists
 
 
-def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[float]]:
+def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], list[float]]:
     """Higher-order map function.
 
     Args:
@@ -316,7 +316,7 @@ def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[fl
         Function that maps fn over an iterable
 
     """
-    def _map(ls: Iterable[float]) -> Iterable[float]:
+    def _map(ls: Iterable[float]) -> list[float]:
         return [fn(x) for x in ls]
 
     return _map
@@ -324,7 +324,7 @@ def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[fl
 
 def zipWith(
     fn: Callable[[float, float], float],
-) -> Callable[[Iterable[float], Iterable[float]], Iterable[float]]:
+) -> Callable[[Iterable[float], Iterable[float]], list[float]]:
     """Higher-order zipWith function.
 
     Args:
@@ -336,7 +336,7 @@ def zipWith(
         Function that combines two iterables element-wise
 
     """
-    def _zipWith(ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
+    def _zipWith(ls1: Iterable[float], ls2: Iterable[float]) -> list[float]:
         return [fn(x, y) for x, y in zip(ls1, ls2)]
 
     return _zipWith
@@ -366,7 +366,7 @@ def reduce(
     return _reduce
 
 
-def negList(ls: Iterable[float]) -> Iterable[float]:
+def negList(ls: Iterable[float]) -> list[float]:
     """Negate all elements in a list.
 
     Args:
@@ -381,7 +381,7 @@ def negList(ls: Iterable[float]) -> Iterable[float]:
     return map(neg)(ls)
 
 
-def addLists(ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
+def addLists(ls1: Iterable[float], ls2: Iterable[float]) -> list[float]:
     """Add corresponding elements from two lists.
 
     Args:
